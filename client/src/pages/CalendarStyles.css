@@ -1,0 +1,35 @@
+.react-calendar {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
+  }
+  
+  .react-calendar__tile--now {
+    background: #f0f8ff !important;
+  }
+  
+  .react-calendar__tile--active {
+    background: #4a90e2 !important;
+    color: white !important;
+  }
+  
+  .highlight-day {
+    background: #e6f7ff;
+    border-radius: 50%;
+  }
+  
+  .habit-marker {
+    color: #4CAF50;
+    font-weight: bold;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+  }
+  
+  .react-calendar__navigation button {
+    min-width: 44px;
+  }

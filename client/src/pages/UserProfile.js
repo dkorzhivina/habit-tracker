@@ -4,10 +4,45 @@ import StyledContainer from '../components/ui/StyledContainer';
 import StyledCard from '../components/ui/StyledCard';
 import Habits from './Habits';
 import RoutableButton from '../components/ui/RoutableButton';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import './CalendarStyles.css'; 
 
 const UserProfile = () => {
   const { user } = useAuth();
   const [activeTab, setActiveTab] = useState('habits');
+  const [date, setDate] = useState(new Date());
+  const [habitsMarked, setHabitsMarked] = useState({
+    // Пример данных: дни, когда привычки были выполнены
+    '2025-01-15': true,
+    '2025-02-20': true,
+    '2025-03-10': true,
+  });
+
+  // Форматирование даты в YYYY-MM-DD
+  const formatDate = (date) => {
+    return date.toISOString().split('T')[0];
+  };
+
+  // Пользовательское содержимое для ячеек календаря
+  const tileContent = ({ date, view }) => {
+    if (view === 'month') {
+      const dateStr = formatDate(date);
+      return habitsMarked[dateStr] ? (
+        <div className="habit-marker">✓</div>
+      ) : null;
+    }
+    return null;
+  };
+
+  // Подсветка дней с выполненными привычками
+  const tileClassName = ({ date, view }) => {
+    if (view === 'month') {
+      const dateStr = formatDate(date);
+      return habitsMarked[dateStr] ? 'highlight-day' : '';
+    }
+    return '';
+  };
 
   return (
     <StyledContainer fullHeight>
@@ -43,13 +78,25 @@ const UserProfile = () => {
         
         {activeTab === 'calendar' && (
           <div style={{
-            backgroundColor: '#f5f5f5',
             padding: '20px',
             borderRadius: '8px',
-            minHeight: '300px'
+            minHeight: '300px',
+            display: 'flex',
+            justifyContent: 'center'
           }}>
-            <h3>Календарь привычек</h3>
-            {/* Calendar component will be added here */}
+            <Calendar
+              onChange={setDate}
+              value={date}
+              tileContent={tileContent}
+              tileClassName={tileClassName}
+              minDetail="year"
+              maxDetail="month"
+              calendarType="gregory"
+              locale="ru-RU"
+              next2Label={null}
+              prev2Label={null}
+              showNeighboringMonth={false}
+            />
           </div>
         )}
 
@@ -61,7 +108,6 @@ const UserProfile = () => {
             minHeight: '300px'
           }}>
             <h3>Статистика</h3>
-            {/* Stats component will be added here */}
           </div>
         )}
       </StyledCard>
