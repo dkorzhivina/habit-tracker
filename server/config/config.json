@@ -5,7 +5,7 @@
       "database": "habit_tracker",
       "host": "127.0.0.1",
       "dialect": "postgres",
-      "port": 5433,
+      "port": 5432,
       "dialectOptions": {
         "ssl": false
       }
@@ -16,7 +16,7 @@
       "database": "habit_tracker_test",
       "host": "localhost",
       "dialect": "postgres",
-      "port": 5433
+      "port": 5432
     },
     "production": {
       "username": "postgres",
@@ -24,6 +24,6 @@
       "database": "habit_tracker_prod",
       "host": "localhost",
       "dialect": "postgres",
-      "port": 5433
+      "port": 5432
     }
   }
