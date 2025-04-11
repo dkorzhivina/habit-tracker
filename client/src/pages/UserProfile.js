@@ -37,12 +37,6 @@ const UserProfile = () => {
           >
             Статистика
           </RoutableButton>
-          <RoutableButton 
-            primary={activeTab === 'profile'}
-            onClick={() => setActiveTab('profile')}
-          >
-            Профиль
-          </RoutableButton>
         </div>
 
         {activeTab === 'habits' && <Habits />}
@@ -68,18 +62,6 @@ const UserProfile = () => {
           }}>
             <h3>Статистика</h3>
             {/* Stats component will be added here */}
-          </div>
-        )}
-
-        {activeTab === 'profile' && (
-          <div style={{
-            backgroundColor: '#f5f5f5',
-            padding: '20px',
-            borderRadius: '8px',
-            minHeight: '300px'
-          }}>
-            <h3>Профиль пользователя</h3>
-            {/* Profile info will be added here */}
           </div>
         )}
       </StyledCard>
