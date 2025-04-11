@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System Test</title>
+  <style>
+    :root {
+      --primary: #4361ee;
+      --light: #f8f9fa;
+      --dark: #212529;
+      --radius: 8px;
+      --shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: var(--radius);
+    }
+    h1 {
+      color: var(--primary);
+    }
+    .card {
+      background: white;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      margin: 20px 0;
+    }
+    .btn {
+      padding: 10px 20px;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    .form-control {
+      width: 100%;
+      max-width: 300px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: var(--radius);
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Design System Test (HTML)</h1>
+    
+    <div class="card">
+      <h2>Card Component</h2>
+      <p>This demonstrates the design system styles</p>
+    </div>
+
+    <button class="btn btn-primary">Primary Button</button>
+
+    <input type="text" class="form-control" placeholder="Test input field">
+  </div>
+</body>
+</html>
