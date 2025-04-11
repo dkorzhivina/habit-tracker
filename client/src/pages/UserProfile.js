@@ -11,7 +11,7 @@ const UserProfile = () => {
 
   return (
     <StyledContainer fullHeight>
-      <StyledCard title={`Профиль ${user?.username || ''}`}>
+      <StyledCard title={`Категории ${user?.username || ''}`}>
         <div style={{
           display: 'flex',
           gap: '10px',
