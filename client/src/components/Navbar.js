@@ -32,11 +32,47 @@ const Navbar = () => {
       </RoutableButton>
       
       <div style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
-        
         {user ? (
           <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
-            <span style={{fontWeight: 'bold'}}>{user.username}</span>
-            <RoutableButton onClick={logout} style={{color: '#ef233c'}}>
+            {/* Кнопка профиля */}
+            <RoutableButton 
+              to="/account" 
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '5px',
+                color: '#4361ee',
+                background: '#f8f9fa',
+                padding: '8px 12px',
+                borderRadius: '20px'
+              }}
+            >
+              <span style={{
+                width: '24px',
+                height: '24px',
+                borderRadius: '50%',
+                background: '#4361ee',
+                color: 'white',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '12px'
+              }}>
+               {user.username?.charAt(0).toUpperCase() ?? '👤'}
+              </span>
+              <span>Аккаунт</span>
+            </RoutableButton>
+
+            {/* Кнопка выхода */}
+            <RoutableButton 
+              onClick={logout} 
+              style={{
+                color: '#ef233c',
+                background: '#f8f9fa',
+                padding: '8px 12px',
+                borderRadius: '20px'
+              }}
+            >
               Выйти
             </RoutableButton>
           </div>
