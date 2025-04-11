@@ -1,7 +1,4 @@
-
-
-import { useContext } from 'react';
-import { createContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useState, useEffect, useCallback, useContext } from 'react';
 import api from '../utils/api';
 
 export const AuthContext = createContext();
@@ -26,20 +23,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await api.get('/users/auth/me');
-        setUser(res.data);
-        setIsAuthenticated(true);
-      } catch (err) {
-        setUser(null);
-        setIsAuthenticated(false);
-      } finally {
-        setLoading(false); // Убедитесь, что это выполняется
-      }
-    };
     checkAuth();
-  }, []);
+  }, [checkAuth]);
 
   // Регистрация
   const register = async (formData) => {
@@ -78,10 +63,45 @@ export const AuthProvider = ({ children }) => {
     } finally {
       setUser(null);
       setIsAuthenticated(false);
-      // Перенаправление на главную страницу после выхода
       if (window.location.pathname !== '/') {
         window.location.href = '/';
       }
+    }
+  };
+
+  // Обновление данных пользователя
+  const updateUser = async (updatedData) => {
+    try {
+      const res = await api.patch('/users/me', updatedData);
+      setUser(prev => ({ ...prev, ...res.data }));
+      return { success: true, data: res.data };
+    } catch (err) {
+      return {
+        success: false,
+        error: err.response?.data?.message || 'Ошибка обновления профиля'
+      };
+    }
+  };
+
+  // Загрузка аватарки
+  const uploadAvatar = async (file) => {
+    try {
+      const formData = new FormData();
+      formData.append('avatar', file);
+      
+      const res = await api.patch('/users/me/avatar', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      
+      setUser(prev => ({ ...prev, avatar: res.data.avatarUrl }));
+      return { success: true, url: res.data.avatarUrl };
+    } catch (err) {
+      return {
+        success: false,
+        error: err.response?.data?.message || 'Ошибка загрузки аватарки'
+      };
     }
   };
 
@@ -92,7 +112,9 @@ export const AuthProvider = ({ children }) => {
     register,
     login,
     logout,
-    checkAuth
+    checkAuth,
+    updateUser,
+    uploadAvatar
   };
 
   return (
@@ -102,7 +124,6 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// Для удобства использования
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

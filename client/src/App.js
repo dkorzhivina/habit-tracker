@@ -10,6 +10,7 @@ import Register from './pages/Register';
 import Habits from './pages/Habits';
 import CalendarPage from './pages/CalendarPage';
 import UserProfile from './pages/UserProfile';
+import AccountPage from './pages/AccountPage'; // Импортируем компонент страницы аккаунта
 
 function App() {
   return (
@@ -22,6 +23,11 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/habits" element={
+                <PrivateRoute>
+                  <Habits />
+                </PrivateRoute>
+              } />
               <Route path="/calendar" element={
                 <PrivateRoute>
                   <CalendarPage />
@@ -30,6 +36,11 @@ function App() {
               <Route path="/profile" element={
                 <PrivateRoute>
                   <UserProfile />
+                </PrivateRoute>
+              } />
+              <Route path="/account" element={
+                <PrivateRoute>
+                  <AccountPage />
                 </PrivateRoute>
               } />
             </Routes>

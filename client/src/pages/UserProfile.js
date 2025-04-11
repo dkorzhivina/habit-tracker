@@ -6,7 +6,7 @@ import Habits from './Habits';
 import RoutableButton from '../components/ui/RoutableButton';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import './CalendarStyles.css';
+import '../styles/CalendarStyles.css';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 const UserProfile = () => {
